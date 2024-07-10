@@ -6,6 +6,10 @@ const categorieRouter = require("./routes/categorie.route");
 const scategorieRouter = require("./routes/scategorie.route");
 const articleRouter = require("./routes/article.route");
 const app = express();
+const cors=require("cors")
+app.use(cors({
+  origin:"http://localhost:3000"
+}))
 dotenv.config();
 //middleware
 app.use(express.json());

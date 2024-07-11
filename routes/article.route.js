@@ -50,7 +50,7 @@ router.get("/:id", async (req, res) => {
 // Supprimer une catégorie
 
 router.delete("/:articleID", async (req, res) => {
-  const id = req.params.articleId;
+  const id = req.params.articleID;
   try {
     await Article.findByIdAndDelete(id);
     res.json({ message: "categorie deleted successfully" });

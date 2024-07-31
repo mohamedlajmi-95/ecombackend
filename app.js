@@ -1,6 +1,6 @@
 const express = require("express");
 const dotenv = require("dotenv");
-
+const paymentRouter = require("./routes/payment.route.js");
 const mongoose = require("mongoose");
 const categorieRouter = require("./routes/categorie.route");
 const scategorieRouter = require("./routes/scategorie.route");
@@ -30,6 +30,7 @@ mongoose
 app.use("/api/scategories", scategorieRouter);
 app.use("/api/categories", categorieRouter);
 app.use("/api/articles", articleRouter);
+app.use("/api/payment", paymentRouter);
 app.listen(process.env.PORT);
 console.log("Application Run At Port" + process.env.PORT);
 module.exports = app;

@@ -58,6 +58,9 @@ router.delete("/:articleID", async (req, res) => {
     res.status(404).json({ message: error.message });
   }
 });
+
+//Pagination
+
 router.get("/art/pagination", async (req, res) => {
   const filtre = req.query.filtre || "";
 

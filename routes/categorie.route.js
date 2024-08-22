@@ -1,8 +1,10 @@
 const express = require("express");
 const router = express.Router();
 const Categorie = require("../models/categorie");
+const { verifyToken } = require("../middleware/Verify-token");
+const { authorizeRoles } = require("../middleware/authorizeRole");
 
-router.post("/", async (req, res) => {
+router.post("/", verifyToken,authorizeRoles("admin","user"), async (req, res) => {
   const cat1 = new Categorie(req.body);
   try {
     await cat1.save();
@@ -12,7 +14,7 @@ router.post("/", async (req, res) => {
   }
 });
 
-router.get("/", async (req, res) => {
+router.get("/",verifyToken, async (req, res) => {
   try {
     const cat = await Categorie.find({}, null, { sort: { _id: -1 } });
     res.status(200).json(cat);
@@ -22,7 +24,7 @@ router.get("/", async (req, res) => {
   const cat = Categorie.find();
 });
 
-router.put("/:id", async (req, res) => {
+router.put("/:id",verifyToken, async (req, res) => {
   try {
     const cat1 = await Categorie.findByIdAndUpdate(
       req.params.id,
@@ -51,7 +53,7 @@ router.delete("/:categorieId", async (req, res) => {
   const id = req.params.categorieId;
   try {
     await Categorie.findByIdAndDelete(id);
-    res.json({ message: "categorie deleted successfully" });
+    res.json({ message: "category deleted successfully" });
   } catch {
     res.status(404).json({ message: error.message });
   }

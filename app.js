@@ -5,8 +5,10 @@ const mongoose = require("mongoose");
 const categorieRouter = require("./routes/categorie.route");
 const scategorieRouter = require("./routes/scategorie.route");
 const articleRouter = require("./routes/article.route");
+const userRouter = require("./routes/user.route");
 const app = express();
 const cors = require("cors");
+const user = require("./models/user.js");
 app.use(
   cors({
     origin: "*",
@@ -32,5 +34,6 @@ app.use("/api/categories", categorieRouter);
 app.use("/api/articles", articleRouter);
 app.use("/api/payment", paymentRouter);
 app.listen(process.env.PORT);
+app.use("/api/user", userRouter);
 console.log("Application Run At Port" + process.env.PORT);
 module.exports = app;
